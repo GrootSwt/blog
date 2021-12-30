@@ -43,3 +43,8 @@ export function addOrEditUser (data) {
 export function changeUserEnabled (data) {
   return putRequest(ROOT_PATH + 'changeUserEnabled', data)
 }
+
+// 更改密码
+export function changePassword (data) {
+  return putRequest(ROOT_PATH + 'changePassword', data)
+}

@@ -107,7 +107,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import { removeCookie, getCookie, setCookie } from '@/utils/cookies'
-import { modifyAvatar, modifyUserInfo } from '@/api/user'
+import { modifyAvatar, modifyUserInfo, changePassword } from '@/api/user'
 import { deleteFileById, DOWNLOAD_URL, UPLOAD_URL } from '@/api/oss'
 import { logout } from '@/api/login'
 
@@ -266,11 +266,12 @@ export default {
           return this.$message.error('请根据提示完善表单信息！')
         }
         const userInfo = JSON.parse(getCookie('userInfo'))
-        this.putRequest('/micro-user/user/changePassword', {
+        const data = {
           id: userInfo.id,
           oldPassword: this.passwordForm.oldPassword,
           newPassword: this.passwordForm.newPassword
-        }).then(res => {
+        }
+        changePassword(data).then(res => {
           if (res.status !== 'success') {
             return this.$message.error(res.message)
           }
