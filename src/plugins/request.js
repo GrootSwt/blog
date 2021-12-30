@@ -13,6 +13,15 @@ instance.interceptors.request.use(config => {
 })
 //  响应拦截器
 instance.interceptors.response.use(response => {
+  if (response.data.status === 'unauthorized') {
+    Message.error(response.data.message)
+    return router.push({
+      path: '/login',
+      query: {
+        redirect: router.history.current.path
+      }
+    })
+  }
   return response
 }, error => {
   responseErrorHandler(error)
@@ -48,11 +57,6 @@ function responseErrorHandler (error) {
       break
   }
 }
-
-// function removeCookies () {
-//   removeCookie('token')
-//   removeCookie('userInfo')
-// }
 
 // get请求，可以将参数放在路径，也可以将参数放入data中
 export function getRequest (url, data = {}) {
