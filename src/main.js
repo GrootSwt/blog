@@ -20,6 +20,9 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'element-ui/lib/theme-chalk/icon.css'
 // 引入权限判断方法
 import isAuth from './utils/authority'
+// 引入markdown
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 // 使用图标选择器
 Vue.use(eIconPicker, {
   FontAwesome: true,
@@ -27,6 +30,7 @@ Vue.use(eIconPicker, {
   eIcon: true,
   eIconSymbol: true
 })
+Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 
