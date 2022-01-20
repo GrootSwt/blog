@@ -86,7 +86,7 @@
         <el-form-item label="邮箱" prop="email">
           <el-input type="email" v-model="userForm.email"></el-input>
         </el-form-item>
-        <el-form-item label="角色" prop="roleId" v-if="userForm.id !== 1">
+        <el-form-item label="角色" prop="roleId">
           <el-select v-model="userForm.roleId" placeholder="请选择角色">
             <el-option
               v-for="item in roleList"
@@ -187,7 +187,7 @@ export default {
         username: '',
         phoneNumber: '',
         email: '',
-        roleId: 1,
+        roleId: '',
         enabled: '1'
       },
       userFormRules: {
