@@ -19,10 +19,12 @@ import 'font-awesome/css/font-awesome.min.css'
 // element-ui 图标库
 import 'element-ui/lib/theme-chalk/icon.css'
 // 引入权限判断方法
-import isAuth from './utils/authority'
+import { verify } from './utils/util'
 // 引入markdown
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+// 引入全局通用样式
+import './assets/css/common-global.less'
 // 使用图标选择器
 Vue.use(eIconPicker, {
   FontAwesome: true,
@@ -42,7 +44,7 @@ Vue.prototype.postRequest = postRequest
 Vue.prototype.putRequest = putRequest
 Vue.prototype.deleteRequest = deleteRequest
 // 权限校验
-Vue.prototype.isAuth = isAuth
+Vue.prototype.verify = verify
 new Vue({
   router,
   store,

@@ -1,8 +1,8 @@
 <template>
   <div>
     <!--查询输入框、按钮和新增按钮-->
-    <div class="search-add">
-      <div class="search-condition">
+    <search-box class="cg-search-box" :form-width="75" :operation-width="25">
+      <template v-slot:form>
         <el-input
           placeholder="请输入数据字典类别名" v-model="searchForm.categoryName" size="small" clearable
           style="width: 25%; margin-right: 10px">
@@ -25,12 +25,12 @@
           </el-option>
         </el-select>
         <el-button type="primary" size="small" icon="el-icon-search" round @click="search">查询</el-button>
-      </div>
-      <div>
+      </template>
+      <template v-slot:operation>
         <el-button type="success" size="small" icon="el-icon-plus" round @click="openFormDialog('1')">新增</el-button>
         <el-button type="danger" size="small" icon="el-icon-delete" round @click="batchDelete">批量删除</el-button>
-      </div>
-    </div>
+      </template>
+    </search-box>
     <!--数据字典列表-->
     <el-table border stripe :data="tableData" style="width: 100%;" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center">
@@ -102,11 +102,12 @@ import {
   changeDictionaryCategoryEnabled
 } from '@/api/dict'
 import FormDialog from '@/views/System/Dict/FormDialog'
+import SearchBox from '@/components/System/SearchBox'
 
 export default {
   name: 'Dict',
   mixins: [BaseMixin],
-  components: { FormDialog },
+  components: { SearchBox, FormDialog },
   data () {
     return {
       searchForm: {
@@ -266,13 +267,6 @@ export default {
 </script>
 
 <style scoped>
-.search-add {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
 
 .search-condition {
   width: 80%;

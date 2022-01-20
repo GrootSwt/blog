@@ -106,7 +106,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import { removeCookie, getCookie, setCookie } from '@/utils/cookies'
+import { removeCookie, getCookie, setCookie } from '@/utils/util'
 import { modifyAvatar, modifyUserInfo, changePassword } from '@/api/user'
 import { deleteFileById, DOWNLOAD_URL, UPLOAD_URL } from '@/api/oss'
 import { logout } from '@/api/login'

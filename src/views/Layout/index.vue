@@ -1,7 +1,7 @@
 <template>
   <el-container class="layout-style">
     <!--侧边菜单栏-->
-    <el-aside :width="asideWidth" v-if="hasAsideMenu">
+    <el-aside class="aside-style" :width="asideWidth" v-if="hasAsideMenu">
       <el-menu ref="asideMenuRef" :default-active="$route.path" :collapse="isCollapse" :unique-opened="true" router
                class="el-menu-vertical">
         <template v-for="menu in menuList">
@@ -39,13 +39,14 @@
         <!--登录信息-->
         <login-info class="login-info"></login-info>
       </el-header>
-      <!--面包屑-->
-      <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb-style">
-        <el-breadcrumb-item :key="index" v-for="(title, index) in $route.meta.breadcrumb">
-          {{ title }}
-        </el-breadcrumb-item>
-      </el-breadcrumb>
       <el-main class="main-box">
+        <!--面包屑-->
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb-style">
+          <el-breadcrumb-item :key="index" v-for="(title, index) in $route.meta.breadcrumb">
+            {{ title }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
+        <!--组件内容-->
         <router-view/>
       </el-main>
     </el-container>
@@ -55,7 +56,7 @@
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
 import LoginInfo from '@/views/Layout/LoginInfo'
-import { getCookie } from '@/utils/cookies'
+import { getCookie } from '@/utils/util'
 import AsideMenu from '@/views/Layout/AsideMenu'
 
 export default {
@@ -95,6 +96,18 @@ export default {
     this.setLoginUserInfo(userInfo)
     this.getMenuList()
   },
+  mounted () {
+    // 监听屏幕宽度变化，控制侧边栏开关
+    const screenWidth = window.screen.width
+    window.onresize = () => {
+      const clientWidth = document.body.clientWidth
+      if (clientWidth <= screenWidth * 3 / 4) {
+        this.isCollapse = true
+      } else {
+        this.isCollapse = false
+      }
+    }
+  },
   methods: {
     ...mapMutations('menu', ['setMenuList']),
     ...mapMutations('user', ['setLoginUserInfo']),
@@ -116,17 +129,27 @@ export default {
 </script>
 
 <style scoped>
+/*整体布局样式*/
 .layout-style {
   width: 100%;
   height: 100%;
 }
 
+/*侧边栏样式*/
+.aside-style {
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/*水平菜单栏样式*/
 .header-menu {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .login-info {
@@ -149,7 +172,7 @@ export default {
 
 /*面包屑样式*/
 .breadcrumb-style {
-  margin: 12px 18px;
+  margin: 0 0 20px;
 }
 
 .el-menu.el-menu--horizontal {
@@ -193,6 +216,6 @@ export default {
 }
 
 .main-box {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 </style>

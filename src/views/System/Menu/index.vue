@@ -25,14 +25,17 @@
         <el-row>
           <el-col :span="20">
             <div style="text-align: center; margin-bottom: 12px">
-              <el-button type="primary" size="small" round icon="el-icon-plus"
+              <el-button type="primary" size="small" round
+                         icon="el-icon-plus" v-show="this.verify('addSameNode')"
                          @click="addMenu">新增同级节点
               </el-button>
-              <el-button type="primary" size="small" round icon="el-icon-plus"
+              <el-button type="primary" size="small" round
+                         icon="el-icon-plus" v-show="this.verify('addSubNode')"
                          @click="addSubMenu">新增子节点
               </el-button>
               <el-button type="danger" size="small" round
-                         icon="el-icon-delete" @click="deleteNode">删除该节点
+                         icon="el-icon-delete"  v-show="this.verify('deleteNode')"
+                         @click="deleteNode">删除该节点
               </el-button>
             </div>
             <el-form :model="menuForm" :rules="menuFormRules" ref="menuFormRef" label-width="80px">

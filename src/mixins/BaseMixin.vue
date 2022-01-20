@@ -1,5 +1,5 @@
 <script>
-import { formatTime, formatDate } from '@/utils/format'
+import { formatTime, formatDate } from '@/utils/util'
 
 export default {
   name: 'BaseMixin',

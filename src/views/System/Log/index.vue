@@ -1,12 +1,10 @@
 <template>
   <div>
     <!--日志查询和操作-->
-    <div class="search-add">
-      <div class="search-form">
-        <el-input placeholder="请输入服务名" v-model="searchForm.serviceName" size="small" clearable
-                  style="width: 20%; margin-right: 10px"></el-input>
+    <search-box :form-width="75" :operation-width="25">
+      <template v-slot:form>
         <el-input placeholder="请输入登录账号" v-model="searchForm.loginName" size="small" clearable
-                  style="width: 20%; margin-right: 10px"></el-input>
+                  style="width: 25%; margin-right: 10px"></el-input>
         <el-date-picker
           v-model="searchForm.dateRange"
           type="daterange"
@@ -22,11 +20,11 @@
                    inactive-color="#ff4949" style="margin-right: 10px" @change="search">
         </el-switch>
         <el-button type="primary" size="small" icon="el-icon-search" round @click="search">查询</el-button>
-      </div>
-      <div>
+      </template>
+      <template v-slot:operation>
         <el-button type="danger" size="small" icon="el-icon-delete" round @click="batchDelete">批量删除</el-button>
-      </div>
-    </div>
+      </template>
+    </search-box>
     <!--日志列表-->
     <el-table border stripe :data="logList" style="width: 100%;" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center">
@@ -83,11 +81,12 @@
 import BaseMixin from '@/mixins/BaseMixin'
 import { pageableSearchLog, batchDeleteLog } from '@/api/log'
 import ViewLog from './ViewLog'
+import SearchBox from '@/components/System/SearchBox'
 
 export default {
   name: 'Log',
   mixins: [BaseMixin],
-  components: { ViewLog },
+  components: { SearchBox, ViewLog },
   data () {
     return {
       searchForm: {
@@ -182,14 +181,6 @@ export default {
 </script>
 
 <style scoped>
-.search-add {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
 .search-form {
   max-width: 90%;
   display: flex;

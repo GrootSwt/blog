@@ -24,7 +24,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import { login } from '@/api/login'
-import { setCookie } from '@/utils/cookies'
+import { setCookie } from '@/utils/util'
 
 export default {
   name: 'Login',

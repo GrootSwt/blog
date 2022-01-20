@@ -5,7 +5,7 @@ import 'nprogress/nprogress.css'
 import Layout from '../views/Layout'
 import Home from '../views/Home'
 import Login from '../views/Login'
-import { getCookie } from '@/utils/cookies'
+import { getCookie } from '@/utils/util'
 
 Vue.use(VueRouter)
 
