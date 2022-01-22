@@ -31,3 +31,8 @@ export function saveMenu (data) {
 export function getAllMenuForUser () {
   return getRequest(ROOT_PATH + 'getAllMenuForUser')
 }
+
+// 判断新增路径是否已经存在
+export function pathIsExist (path) {
+  return getRequest(ROOT_PATH + `pathIsExist?path=${path}`)
+}
