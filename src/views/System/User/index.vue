@@ -42,9 +42,9 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="180">
+      <el-table-column label="操作" width="280">
         <template v-slot="{ row }">
-          <!--<el-button size="mini" type="primary" round icon="el-icon-edit" @click="openEditDialog(row)">编辑</el-button>-->
+          <el-button size="mini" type="primary" round icon="el-icon-edit" @click="openEditDialog(row)">编辑</el-button>
           <el-button size="mini" type="warning" round icon="el-icon-setting" @click="openAuthorizeDialog(row)">授权
           </el-button>
           <el-button size="mini" type="danger" round icon="el-icon-delete" @click="deleteRoleById(row.id)">删除
@@ -419,6 +419,7 @@ export default {
     // 取消新增或者编辑用户
     addOrEditCancel () {
       this.$refs.userFormRef.resetFields()
+      console.log(this.userForm)
       this.editOrAddVisible = false
     },
     // 提交编辑或新增用户
