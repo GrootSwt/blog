@@ -144,7 +144,8 @@ import {
   batchDeleteByIds, changeRoleEnabled,
   getMenuIdArrByRoleId,
   pageableSearchMenu,
-  saveRole
+  saveRole,
+  roleNameIsExist
 } from '@/api/role'
 import { getAllMenuForUser } from '@/api/menu'
 
@@ -154,6 +155,22 @@ export default {
   name: 'Role',
   components: { SearchBox },
   data () {
+    const validateName = async (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入角色名称！'))
+      }
+      if (value.length > 20) {
+        return callback(new Error('角色名称长度范围在1-20之内！'))
+      }
+      const res = await roleNameIsExist(value)
+      if (res.status !== 'success') {
+        return this.$message.error('获取角色名称是否存在失败！')
+      }
+      if (res.data) {
+        return callback(new Error('该角色名已存在，请更改！'))
+      }
+      callback()
+    }
     return {
       // 查询条件角色名
       searchName: '',
@@ -179,14 +196,7 @@ export default {
       roleFormRules: {
         name: [
           {
-            required: true,
-            message: '请输入角色名称！',
-            trigger: 'blur'
-          },
-          {
-            min: 1,
-            max: 20,
-            message: '角色名称长度范围在1-20之内！',
+            validator: validateName,
             trigger: 'blur'
           }
         ],

@@ -40,3 +40,8 @@ export function changeRoleEnabled (data) {
 export function getAllRoleList () {
   return getRequest(ROOT_PATH + 'getAllRoleList')
 }
+
+// 判断角色名是否已经存在
+export function roleNameIsExist (roleName) {
+  return getRequest(ROOT_PATH + `${roleName}/roleNameIsExist`)
+}

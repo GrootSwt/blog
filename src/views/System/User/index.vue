@@ -143,8 +143,9 @@ import {
   addOrEditUser,
   authorization,
   batchDeleteUser,
-  changeUserEnabled,
-  pageableSearchUser
+  changeUserEnabled, emailIsExist,
+  loginNameIsExist,
+  pageableSearchUser, phoneNumberIsExist
 } from '@/api/user'
 import { getAllRoleList } from '@/api/role'
 import SearchBox from '@/components/System/SearchBox'
@@ -167,6 +168,54 @@ export default {
       } else {
         return callback()
       }
+    }
+    const validateLoginName = async (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入登录名！'))
+      }
+      if (value.length > 20) {
+        return callback(new Error('登录名字符长度范围为1~20！'))
+      }
+      const res = await loginNameIsExist(value)
+      if (res.status !== 'success') {
+        return this.$message.error('获取账号名是否存在失败！')
+      }
+      if (res.data) {
+        return callback(new Error('登录名已存在，请更换！'))
+      }
+      callback()
+    }
+    const validatePhoneNumber = async (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入联系方式！'))
+      }
+      if (value.length > 20 || value.length < 4) {
+        return callback(new Error('联系方式字符长度范围为4~20！'))
+      }
+      const res = await phoneNumberIsExist(value)
+      if (res.status !== 'success') {
+        return this.$message.error('获取联系方式是否存在失败！')
+      }
+      if (res.data) {
+        return callback(new Error('联系方式已存在，请更换！'))
+      }
+      callback()
+    }
+    const validateEmail = async (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('请输入电子邮件！'))
+      }
+      if (value.length > 30 || value.length < 5) {
+        return callback(new Error('电子邮件字符长度范围为5~30！'))
+      }
+      const res = await emailIsExist(value)
+      if (res.status !== 'success') {
+        return this.$message.error('获取电子邮件是否存在失败！')
+      }
+      if (res.data) {
+        return callback(new Error('电子邮件已存在，请更换！'))
+      }
+      callback()
     }
     return {
       searchForm: {
@@ -193,14 +242,7 @@ export default {
       userFormRules: {
         loginName: [
           {
-            required: true,
-            message: '请输入账号',
-            trigger: 'blur'
-          },
-          {
-            min: 1,
-            max: 20,
-            message: '账号的长度范围1-20',
+            validator: validateLoginName,
             trigger: 'blur'
           }
         ],
@@ -232,27 +274,13 @@ export default {
         ],
         phoneNumber: [
           {
-            required: true,
-            message: '请输入联系方式',
-            trigger: 'blur'
-          },
-          {
-            min: 1,
-            max: 20,
-            message: '联系方式的长度范围3-20',
+            validator: validatePhoneNumber,
             trigger: 'blur'
           }
         ],
         email: [
           {
-            required: true,
-            message: '请输入邮箱',
-            trigger: 'blur'
-          },
-          {
-            min: 1,
-            max: 30,
-            message: '邮箱的长度范围5-30',
+            validator: validateEmail,
             trigger: 'blur'
           }
         ],

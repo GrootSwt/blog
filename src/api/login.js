@@ -1,4 +1,5 @@
 import { getRequest, postRequest } from '@/plugins/request'
+import { getCookie } from '@/utils/util'
 
 // 登录
 export function login (data) {
@@ -7,5 +8,6 @@ export function login (data) {
 
 // 登出
 export function logout () {
-  return getRequest('/logout')
+  const token = getCookie('token')
+  return getRequest(`${token}/logout`)
 }
