@@ -9,17 +9,17 @@
         <span v-else>{{ loginUserInfo.username }}</span>
       </span>
       <el-dropdown-menu slot="dropdown" style="text-align: center">
-        <el-dropdown-item>
-          <span @click="openModifyAvatarDialog">设置头像</span>
+        <el-dropdown-item @click.native="openModifyAvatarDialog">
+          <span>设置头像</span>
         </el-dropdown-item>
-        <el-dropdown-item>
-          <span @click="openModifyUserInfoDialog">修改信息</span>
+        <el-dropdown-item @click.native="openModifyUserInfoDialog">
+          <span>修改信息</span>
         </el-dropdown-item>
-        <el-dropdown-item>
-          <span @click="changePassword">更改密码</span>
+        <el-dropdown-item @click.native="changePassword">
+          <span>更改密码</span>
         </el-dropdown-item>
-        <el-dropdown-item>
-          <span @click="logout">退出</span>
+        <el-dropdown-item @click.native="logout">
+          <span>退出</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
