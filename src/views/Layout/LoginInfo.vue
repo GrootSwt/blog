@@ -239,21 +239,25 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        logout().then(res => {
-          if (res.status !== 'success') {
-            return this.$message.error('退出失败！')
-          }
-          this.$message.success(res.message)
-          removeCookie('token')
-          removeCookie('userInfo')
-          removeCookie('accountName')
-          this.$router.push('/login')
-        })
+        this.logoutRequest()
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消退出'
         })
+      })
+    },
+    // 退出请求
+    logoutRequest () {
+      logout().then(res => {
+        if (res.status !== 'success') {
+          return this.$message.error('退出失败！')
+        }
+        this.$message.success(res.message)
+        removeCookie('token')
+        removeCookie('userInfo')
+        removeCookie('accountName')
+        this.$router.push('/login')
       })
     },
     changePassword () {
@@ -276,7 +280,7 @@ export default {
             return this.$message.error(res.message)
           }
           this.$message.success('密码更改成功！')
-          this.logout()
+          this.logoutRequest()
         })
       })
     },

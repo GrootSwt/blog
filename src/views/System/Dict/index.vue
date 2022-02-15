@@ -58,7 +58,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column prop="description" label="描述">
+      <el-table-column prop="description" label="描述" show-overflow-tooltip>
       </el-table-column>
       <el-table-column label="操作" width="270">
         <template v-slot="{ row }">
