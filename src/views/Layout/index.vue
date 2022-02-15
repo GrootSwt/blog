@@ -138,7 +138,6 @@ export default {
 /*侧边栏样式*/
 .aside-style {
   box-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 /*水平菜单栏样式*/
@@ -149,7 +148,7 @@ export default {
   align-items: center;
   width: 100%;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  margin-bottom: 2px;
 }
 
 .login-info {
