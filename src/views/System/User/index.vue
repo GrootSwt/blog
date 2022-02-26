@@ -192,7 +192,7 @@ export default {
       if (value.length > 20 || value.length < 4) {
         return callback(new Error('联系方式字符长度范围为4~20！'))
       }
-      const res = await phoneNumberIsExist(value)
+      const res = await phoneNumberIsExist(this.userForm.id, value)
       if (res.status !== 'success') {
         return this.$message.error('获取联系方式是否存在失败！')
       }
@@ -208,7 +208,7 @@ export default {
       if (value.length > 30 || value.length < 5) {
         return callback(new Error('电子邮件字符长度范围为5~30！'))
       }
-      const res = await emailIsExist(value)
+      const res = await emailIsExist(this.userForm.id, value)
       if (res.status !== 'success') {
         return this.$message.error('获取电子邮件是否存在失败！')
       }
@@ -419,7 +419,8 @@ export default {
     // 取消新增或者编辑用户
     addOrEditCancel () {
       this.$refs.userFormRef.resetFields()
-      console.log(this.userForm)
+      this.userForm = {}
+      this.userForm.enabled = true
       this.editOrAddVisible = false
     },
     // 提交编辑或新增用户

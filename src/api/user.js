@@ -55,11 +55,19 @@ export function loginNameIsExist (loginName) {
 }
 
 // 联系方式是否存在
-export function phoneNumberIsExist (phoneNumber) {
-  return getRequest(ROOT_PATH + `${phoneNumber}/phoneNumberIsExist`)
+export function phoneNumberIsExist (id, phoneNumber) {
+  let url = ROOT_PATH + `/phoneNumberIsExist?phoneNumber=${phoneNumber}`
+  if (id) {
+    url += `&id=${id}`
+  }
+  return getRequest(url)
 }
 
 // 电子邮件是否存在
-export function emailIsExist (email) {
-  return getRequest(ROOT_PATH + `${email}/emailIsExist`)
+export function emailIsExist (id, email) {
+  let url = ROOT_PATH + `/emailIsExist?email=${email}`
+  if (id) {
+    url += `&id=${id}`
+  }
+  return getRequest(url)
 }
