@@ -20,17 +20,17 @@
       </el-table-column>
       <el-table-column type="index" label="#" width="50" align="center">
       </el-table-column>
-      <el-table-column prop="username" label="用户名">
+      <el-table-column prop="username" label="用户名" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="loginName" label="账号">
+      <el-table-column prop="loginName" label="账号" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="phoneNumber" label="联系方式" width="200">
+      <el-table-column prop="phoneNumber" label="联系方式" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="email" label="邮箱" width="240">
+      <el-table-column prop="email" label="邮箱" width="240" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="roleName" label="角色名" width="240">
+      <el-table-column prop="roleName" label="角色名" width="150" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="enabled" label="启用状态" width="100">
+      <el-table-column prop="enabled" label="启用状态" width="100" show-overflow-tooltip>
         <template v-slot="{ row }">
           <el-switch
             v-model="row.enabled"
@@ -375,13 +375,18 @@ export default {
     },
     // 打开新增对话框
     openAddDialog () {
+      this.userForm = {
+        enabled: '1'
+      }
       this.editStatus = false
       this.editOrAddVisible = true
     },
     // 开启编辑对话框
     openEditDialog (user) {
-      this.userForm = JSON.parse(JSON.stringify(user))
       this.editStatus = true
+      this.$nextTick(() => {
+        this.userForm = JSON.parse(JSON.stringify(user))
+      })
       this.editOrAddVisible = true
     },
     // 根据用户Id删除用户
@@ -419,8 +424,6 @@ export default {
     // 取消新增或者编辑用户
     addOrEditCancel () {
       this.$refs.userFormRef.resetFields()
-      this.userForm = {}
-      this.userForm.enabled = true
       this.editOrAddVisible = false
     },
     // 提交编辑或新增用户

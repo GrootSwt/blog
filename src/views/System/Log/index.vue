@@ -35,7 +35,7 @@
       </el-table-column>
       <el-table-column prop="requestURI" show-overflow-tooltip label="请求路径" width="300">
       </el-table-column>
-      <el-table-column prop="success" label="状态" width="100">
+      <el-table-column prop="success" label="状态" width="100" show-overflow-tooltip>
         <template v-slot="{ row }">
           <el-switch
             v-model="row.success"

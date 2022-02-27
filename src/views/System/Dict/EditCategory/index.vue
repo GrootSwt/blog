@@ -36,16 +36,16 @@
       </el-table-column>
       <el-table-column type="index" label="#" width="50" align="center">
       </el-table-column>
-      <el-table-column prop="dictionaryKey" label="key">
+      <el-table-column prop="dictionaryKey" label="key" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="dictionaryValue" label="value">
+      <el-table-column prop="dictionaryValue" label="value" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="200">
+      <el-table-column prop="createTime" label="创建时间" width="200" show-overflow-tooltip>
         <template v-slot="{row}">
           {{ formatTime(row.createTime) }}
         </template>
       </el-table-column>
-      <el-table-column prop="enabled" label="启用状态">
+      <el-table-column prop="enabled" label="启用状态" show-overflow-tooltip>
         <template v-slot="{ row }">
           <el-switch
             v-model="row.enabled"
@@ -57,7 +57,7 @@
           </el-switch>
         </template>
       </el-table-column>
-      <el-table-column prop="description" label="描述">
+      <el-table-column prop="description" label="描述" show-overflow-tooltip>
       </el-table-column>
       <el-table-column label="操作" width="180">
         <template v-slot="{ row }">

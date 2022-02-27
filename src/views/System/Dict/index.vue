@@ -37,16 +37,16 @@
       </el-table-column>
       <el-table-column type="index" label="#" width="50" align="center">
       </el-table-column>
-      <el-table-column prop="categoryName" label="类别名称">
+      <el-table-column prop="categoryName" label="类别名称" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="categoryKey" label="key">
+      <el-table-column prop="categoryKey" label="key" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="200">
+      <el-table-column prop="createTime" label="创建时间" width="200" show-overflow-tooltip>
         <template v-slot="{row}">
           {{ formatTime(row.createTime) }}
         </template>
       </el-table-column>
-      <el-table-column prop="enabled" label="启用状态">
+      <el-table-column prop="enabled" label="启用状态" show-overflow-tooltip>
         <template v-slot="{ row }">
           <el-switch
             v-model="row.enabled"

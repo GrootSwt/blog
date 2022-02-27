@@ -17,11 +17,11 @@
       </el-table-column>
       <el-table-column type="index" label="#" width="50" align="center">
       </el-table-column>
-      <el-table-column prop="name" label="角色名" width="240">
+      <el-table-column prop="name" label="角色名" width="240" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="description" label="描述">
+      <el-table-column prop="description" label="描述" show-overflow-tooltip>
       </el-table-column>
-      <el-table-column prop="enabled" label="启用" width="100">
+      <el-table-column prop="enabled" label="启用" width="100" show-overflow-tooltip>
         <template v-slot="{ row }">
           <el-switch
             v-model="row.enabled"
